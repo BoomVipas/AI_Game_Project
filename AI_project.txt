@@ -1,0 +1,73 @@
+Vipas Chantrapanichkul 6538192921
+
+What is this project?
+    This project is an AI-based board game featuring two players, "A" and "B",
+    who compete on an 8x8 grid. The game's goal is for each player to collect as many coins as possible "*", 
+    strategically placed on the grid. The project includes a guessing gameplay which make the user can enjoy the gameplay
+    and excited with the outcome of the competing two bot.
+
+What does this project demonstrate?
+
+    Minimax Algorithm: 
+        The core AI of this project uses the Minimax algorithm with alpha-beta pruning to determine the best moves
+        for each player based on current game states. This algorithm is fundamental in game theory for decision-making 
+        processes in zero-sum games.
+
+    Gameplay Interface:
+        The project features a user-friendly gameplay interface that allows users to interact 
+        with the game by guessing the winner and watch the gameplay move by move.
+
+Thought Process and Function Description:
+    __init__:
+
+        This function have a role to initialize and set everything in the game such as game state, setting up board
+        players, scores, coins. Basically, set everything to default. There is a case where the randomly placed coin 
+        is in the same spot as the player A or B so, this function ensure that never going happen.
+
+    place_coins: 
+        This function is where the coin is randomly placeed on the board, ensuring they do not overlap 
+        with player positions. It ensures each game can have a unique setup.
+
+    update_board:
+        This function is for updating board and pass to print_board function to visualize the board for every move 
+        and every decision making of each player(A and B)
+
+    print_board: 
+        Outputs the current state of the board to the terminal, allowing the user to see every move on the board step by step. 
+        This function is key for user interaction, allowing players to track the game's progress.
+
+    available_moves: 
+        Calculates every possible move for the player(A or B). There will be the case where player is in the coner
+        which make the player have a less choice. This function is also essential for the Minimax algorithm to evaluate
+        possible future states.
+
+    make_move: 
+        This function make move for a player and also updating the game state continuosly. It also handle the scoring
+        when a coin is collected.
+
+    is_terminal(END GAME FUNCTION):
+        This function check if the game is in the final state or not(all coins are collected or no more valid move
+        are available). This function decide when the game loop should end.
+
+    utility_function:
+        This function is the most important function in my opinion. It evaluate and return a score for particular state for player used by minimax
+        The score is calculating by the distance between player and the nearest coin, distance between opponent and the nearest coin, and
+        the score differnce between players.
+        just like the heuristic value for the minimax. :]
+
+    distance_to_nearest_coin: 
+        Calculates the Manhattan distance from a player to the nearest coin, which is the part of calculation 
+        that help run minimax.
+
+    calculate_dynamic_depth: 
+        Adjusts the depth of the Minimax algorithm based on the current complexity of the game,
+        optimizing performance as the game progresses.
+
+    minimax: 
+        Implements the Minimax algorithm using alpha-beta pruning to enhance performance and also impletmenting 
+        the dynamic depth which the depth will be set to 4 and decrease as the coins are collected.
+
+        The reason:
+            previously, I encounter with the inifinite loop. It happened within the midgame and endgame play, after struggling for
+            full 4 day, I finally realize that my previous code has too much depth. It affected the minimax to overthinking and juke.
+            so, when game state enter midgame or finalgame. I decrease the depth of searching to make the bot can end the game.
